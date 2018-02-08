@@ -64,7 +64,7 @@ fi
 for var in "$@"
 do
 
-	dirs="| grep -z -v \"^$var\" \
+	dirs="| grep --null -v \"^$var\" \
 	$dirs"
 
 done
@@ -93,13 +93,13 @@ exit;
 #
 #########################
 #
-git filter-branch \
-    --prune-empty \
-    --index-filter '
-        git ls-tree -z -r --name-only --full-tree $GIT_COMMIT \
-        | grep -z -v "^config" \
-        | grep -z -v "^public_html" \
-        | xargs -0 -r git rm --cached -r
-    ' \
-    -- \
-    "${branch_name}"
+# git filter-branch \
+#    --prune-empty \
+#    --index-filter '
+#        git ls-tree -z -r --name-only --full-tree $GIT_COMMIT \
+#        | grep -z -v "^config" \
+#        | grep -z -v "^public_html" \
+#        | xargs -0 -r git rm --cached -r
+#    ' \
+#    -- \
+#    "${branch_name}"
